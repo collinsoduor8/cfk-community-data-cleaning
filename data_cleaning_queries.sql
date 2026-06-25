@@ -17,14 +17,14 @@ SELECT
         END AS INTEGER
     ) AS fee_paid,
 
-    -- Cleaning follow up
+    -- Cleaning follow up column
     CASE
        WHEN LOWER("Follow Up Required?") = 'yes' THEN 'Yes'
        WHEN LOWER("Follow Up Required?") = 'no'  THEN 'No'
        ELSE 'Unknown' 
     END AS follow_up,
 
-    -- Cleaning visit date
+    -- Cleaning visit date column
     CASE 
         -- Matches '2024-01-05' (Starts with 4-digit Year followed by a dash)
         WHEN "Visit Date" LIKE '____-%' 
@@ -42,7 +42,7 @@ SELECT
         ELSE TO_DATE("Visit Date", 'Mon DD YYYY')
     END AS visit_date,
 
-   ----- cleaning beneficiary id
+   ----- cleaning beneficiary_id column
    CASE 
     WHEN "BeneficiaryID" = 'CFK999' THEN 'Unregistered'
     ELSE "BeneficiaryID"
@@ -132,7 +132,7 @@ SELECT "ActivityID","Program","Activity Name","Attendance","Score/Grade",
         ELSE "BeneficiaryID"
         END AS BeneficiaryID,
 
-        --------cleaning date
+        --------cleaning date column
         CASE
          WHEN "Date"  LIKE '____-%' 
             THEN TO_DATE("Date", 'YYYY-MM-DD')
